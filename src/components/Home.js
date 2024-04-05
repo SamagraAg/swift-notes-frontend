@@ -45,6 +45,7 @@ export default function Home() {
             Submit
           </button>
         </form>
+        <h2>Your Notes</h2>
       </div>
       <Notes></Notes>
     </>
