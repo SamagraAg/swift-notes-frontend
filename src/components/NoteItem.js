@@ -8,17 +8,13 @@ export default function NoteItem(props) {
         <div className="card-body">
           <div className="d-flex align-items-center justify-content-between">
             <h5 className="card-title">{note.title}</h5>
-            <div class="d-flex justify-content-between">
-            <i class="fa-solid fa-trash mx-2"></i>
-              <i class="fa-solid fa-pencil mx-2"></i>
+            <div className="d-flex justify-content-between">
+            <i className="fa-solid fa-trash mx-2"></i>
+              <i className="fa-solid fa-pencil mx-2"></i>
             </div>
           </div>
           <p className="card-text">
-            {note.description} Lorem ipsum, dolor sit amet consectetur
-            adipisicing elit. Praesentium inventore quidem eos, autem saepe vero
-            ea accusamus facilis sapiente deserunt eius totam laboriosam.
-            Expedita similique dolor, quasi mollitia accusamus voluptatibus
-            voluptates eius. Odio, dignissimos.
+            {note.description}
           </p>
         </div>
       </div>
