@@ -12,7 +12,7 @@ const NoteState = (props) => {
   const fetchNotes = async () => {
     //API CALL
     const response = await fetch(`${host}/api/notes/fetchallnotes`, {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         "auth-token":
@@ -25,30 +25,44 @@ const NoteState = (props) => {
     setNotes(fetchedNotes);
   };
 
-  //Add a note
-  const addNote = (title, description, tag) => {
-    //todo -- create new node using API endpoint
-    let newNote = {
-      _id: "660c57398bb26bc04296zaec",
-      user: "660c572d8bb26bc04296faea",
-      title: title,
-      description: description,
-      tag: tag,
-      date: "2024-04-05T17:38:33.865Z",
-      __v: 0,
-    };
-    setNotes(notes.concat(newNote));
+  //Function to add a note
+  const addNote = async (title, description, tag) => {
+    //API CALL
+    const response = await fetch(`${host}/api/notes/addNote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjYwYzU3MmQ4YmIyNmJjMDQyOTZmYWVhIn0sImlhdCI6MTcxMjA4NDc4MX0.inqBo8OcTizxOos-CkKDOqU1pK4M3V_OBKDN3Wd2Fso",
+      },
+      body: JSON.stringify({ title, description, tag }),
+    });
+
+    //appending new node to the notes array
+    const jsonResponse = await response.json();
+    setNotes(notes.concat(jsonResponse.savedNote));
   };
-  //Delete a note
-  const deleteNote = (id) => {
-    console.log(`Deleting node with id ${id}`);
+
+  //  //Function to Delete a note
+  const deleteNote = async (id) => {
+    //API CALL
+    const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjYwYzU3MmQ4YmIyNmJjMDQyOTZmYWVhIn0sImlhdCI6MTcxMjA4NDc4MX0.inqBo8OcTizxOos-CkKDOqU1pK4M3V_OBKDN3Wd2Fso",
+      },
+    });
+
+    //Remove Deleted node from array
     const newNotes = notes.filter((note) => {
       return note._id !== id;
     });
     setNotes(newNotes);
   };
   //Update a note
-  const updateNote = (id) => {};
+  const updateNote = async (id) => {};
 
   return (
     <NoteContext.Provider
