@@ -2,73 +2,28 @@ import NoteContext from "./NoteContext";
 import { useState } from "react";
 
 const NoteState = (props) => {
+  //host url
+  const host = "http://localhost:5000";
+
   //state variable "notes"
-  const intialNotes = [
-    {
-      _id: "660c57398bb26bc04296faec",
-      user: "660c572d8bb26bc04296faea",
-      title: "C++ Assignment",
-      description: "Complete c++ assignment 1 and 2 by April 20 ",
-      tag: "todo",
-      date: "2024-04-02T19:06:33.865Z",
-      __v: 0,
-    },
-    {
-      _id: "660d9cdfe4b9a09faad74273",
-      user: "660c572d8bb26bc04296faea",
-      title: "Cooler",
-      description: "It needs to be repaired",
-      tag: "todo",
-      date: "2024-04-03T18:15:59.281Z",
-      __v: 0,
-    },
-    {
-      _id: "660d9d29e4b9a09faad7427a",
-      user: "660c572d8bb26bc04296faea",
-      title: "IPL Match",
-      description: "Mumbai vs Kolkata match on friday",
-      tag: "sports",
-      date: "2024-04-03T18:17:13.265Z",
-      __v: 0,
-    },
-    {
-      _id: "660d9d29e4b9a09faad7427w",
-      user: "660c572d8bb26bc04296faea",
-      title: "IPL Match",
-      description: "Mumbai vs Kolkata match on friday",
-      tag: "sports",
-      date: "2024-04-03T18:17:13.265Z",
-      __v: 0,
-    },
-    {
-      _id: "660d9d29e4b9a09faad7427x",
-      user: "660c572d8bb26bc04296faea",
-      title: "IPL Match",
-      description: "Mumbai vs Kolkata match on friday",
-      tag: "sports",
-      date: "2024-04-03T18:17:13.265Z",
-      __v: 0,
-    },
-    {
-      _id: "660d9d29e4b9a09faad7427y",
-      user: "660c572d8bb26bc04296faea",
-      title: "IPL Match",
-      description: "Mumbai vs Kolkata match on friday",
-      tag: "sports",
-      date: "2024-04-03T18:17:13.265Z",
-      __v: 0,
-    },
-    {
-      _id: "660d9d29e4b9a09faad7427z",
-      user: "660c572d8bb26bc04296faea",
-      title: "IPL Match",
-      description: "Mumbai vs Kolkata match on friday",
-      tag: "sports",
-      date: "2024-04-03T18:17:13.265Z",
-      __v: 0,
-    },
-  ];
-  const [notes, setNotes] = useState(intialNotes);
+  const [notes, setNotes] = useState([]);
+
+  //Function to fetch all notes via api
+  const fetchNotes = async () => {
+    //API CALL
+    const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjYwYzU3MmQ4YmIyNmJjMDQyOTZmYWVhIn0sImlhdCI6MTcxMjA4NDc4MX0.inqBo8OcTizxOos-CkKDOqU1pK4M3V_OBKDN3Wd2Fso",
+      },
+    });
+
+    //Setting Notes variable with fetched response
+    const fetchedNotes = await response.json();
+    setNotes(fetchedNotes);
+  };
 
   //Add a note
   const addNote = (title, description, tag) => {
@@ -90,13 +45,15 @@ const NoteState = (props) => {
     const newNotes = notes.filter((note) => {
       return note._id !== id;
     });
-    setNotes(newNotes)
+    setNotes(newNotes);
   };
   //Update a note
   const updateNote = (id) => {};
 
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote, updateNote }}>
+    <NoteContext.Provider
+      value={{ notes, addNote, deleteNote, updateNote, fetchNotes }}
+    >
       {props.children}
     </NoteContext.Provider>
   );
