@@ -77,7 +77,7 @@ export default function Notes() {
               ></button>
             </div>
             <div className="modal-body">
-              <form className="my-2">
+              <form className="my-2" onSubmit={handleClick}>
                 <div className="mb-2">
                   <label htmlFor="title" className="form-label">
                     Title
@@ -89,6 +89,8 @@ export default function Notes() {
                     name="title"
                     onChange={onChange}
                     value={enote.title}
+                    required
+                    minLength={5}
                   />
                 </div>
                 <div className="mb-2">
@@ -102,6 +104,8 @@ export default function Notes() {
                     name="description"
                     onChange={onChange}
                     value={enote.description}
+                    required
+                    minLength={5}
                   />
                 </div>
                 <div className="mb-2">
@@ -117,24 +121,20 @@ export default function Notes() {
                     value={enote.tag}
                   />
                 </div>
+
+                <div className="modal-footer">
+                  <button ref={closeref}
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" className="btn btn-primary">
+                    Save changes
+                  </button>
+                </div>
               </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                ref={closeref}
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                onClick={handleClick}
-                type="button"
-                className="btn btn-primary"
-              >
-                Save changes
-              </button>
             </div>
           </div>
         </div>
