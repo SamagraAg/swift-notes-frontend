@@ -43,7 +43,7 @@ const NoteState = (props) => {
     setNotes(notes.concat(jsonResponse.savedNote));
   };
 
-  //  //Function to Delete a note
+  //Function to Delete a note
   const deleteNote = async (id) => {
     //API CALL
     const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
@@ -61,8 +61,22 @@ const NoteState = (props) => {
     });
     setNotes(newNotes);
   };
-  //Update a note
-  const updateNote = async (id) => {};
+
+  //Function to edit/Update a note
+  const updateNote = async (id, title, description, tag) => {
+    //API CALL
+    const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjYwYzU3MmQ4YmIyNmJjMDQyOTZmYWVhIn0sImlhdCI6MTcxMjA4NDc4MX0.inqBo8OcTizxOos-CkKDOqU1pK4M3V_OBKDN3Wd2Fso",
+      },
+      body: JSON.stringify({ title, description, tag }),
+    });
+    const jsonResponse = await response.json()
+    console.log(jsonResponse)
+  };
 
   return (
     <NoteContext.Provider

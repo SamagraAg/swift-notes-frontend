@@ -5,23 +5,35 @@ import NoteItem from "./NoteItem";
 export default function Notes() {
   //using note context
   const context = useContext(NoteContext);
-  const { notes, fetchNotes } = context;
+  const { notes, fetchNotes, updateNote } = context;
 
-  const ref = useRef(null);
+  const openref = useRef(null);
+  const closeref = useRef(null);
 
   //state varialbe eNote for updating/editing the note
-  const [enote, setNote] = useState({ title: "", description: "", tag: "" });
+  const [enote, setNote] = useState({
+    _id: "",
+    title: "",
+    description: "",
+    tag: "",
+  });
   const onChange = (e) => {
     setNote({ ...enote, [e.target.name]: e.target.value });
   };
 
-  //Function to update/edit the note
-  const updateNote = (note) => {
+  //Function to facilate note editing for user
+  const editNote = (note) => {
     //Open the modal by clicking on hidden button
-    ref.current.click();
+    openref.current.click();
 
     //initlaise the value of eNote with oldTitle, oldDescription and oldTag of 'note'(note to be edited)
     setNote(note);
+  };
+
+  //Function to hit API call for updating note
+  const handleClick = () => {
+    closeref.current.click();
+    updateNote(enote._id, enote.title, enote.description, enote.tag);
   };
 
   //Fetching User notes on load
@@ -34,7 +46,7 @@ export default function Notes() {
     //Button to open modal. It will be hidden and clicked via 'ref'
     <div className="container">
       <button
-        ref={ref}
+        ref={openref}
         type="button"
         className="btn btn-primary d-none"
         data-bs-toggle="modal"
@@ -109,13 +121,18 @@ export default function Notes() {
             </div>
             <div className="modal-footer">
               <button
+                ref={closeref}
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                onClick={handleClick}
+                type="button"
+                className="btn btn-primary"
+              >
                 Save changes
               </button>
             </div>
@@ -128,11 +145,7 @@ export default function Notes() {
       <div className="row">
         {notes.map((note) => {
           return (
-            <NoteItem
-              key={note._id}
-              note={note}
-              updateNote={updateNote}
-            ></NoteItem>
+            <NoteItem key={note._id} note={note} editNote={editNote}></NoteItem>
           );
         })}
       </div>
