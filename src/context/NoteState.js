@@ -1,3 +1,4 @@
+import { json } from "react-router-dom";
 import NoteContext from "./NoteContext";
 import { useState } from "react";
 
@@ -74,8 +75,24 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag }),
     });
-    const jsonResponse = await response.json()
-    console.log(jsonResponse)
+    const jsonResponse = await response.json();
+    const updatedNote = jsonResponse.updatedNote;
+
+    //making copy of notes array and then making change to this copy
+    const notesCopy = JSON.parse(JSON.stringify(notes));
+
+    //finding note to updated in notes array and updating it
+    for (let index = 0; index < notesCopy.length; index++) {
+      let iNote = notesCopy[index];
+      if (iNote._id === id) {
+        notesCopy[index].title = updatedNote.title;
+        notesCopy[index].description = updatedNote.description;
+        notesCopy[index].tag = updatedNote.tag;
+        break;
+      }
+    }
+    //update the notes array with the notesCopy array which contains newNote
+    setNotes(notesCopy);
   };
 
   return (
