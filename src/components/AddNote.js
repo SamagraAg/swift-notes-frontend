@@ -19,7 +19,7 @@ export default function AddNote() {
   return (
     <div className="container">
       <h2 className="mt-2">Add new note</h2>
-      <form className="my-2">
+      <form className="my-2" onSubmit={handleClick}>
         <div className="mb-2">
           <label htmlFor="title" className="form-label">
             Title
@@ -31,6 +31,7 @@ export default function AddNote() {
             name="title"
             onChange={onChange}
             value={note.title}
+            required minLength={5}
           />
         </div>
         <div className="mb-2">
@@ -44,6 +45,7 @@ export default function AddNote() {
             name="description"
             onChange={onChange}
             value={note.description}
+            required minLength={5}
           />
         </div>
         <div className="mb-2">
@@ -60,8 +62,8 @@ export default function AddNote() {
           />
         </div>
         <button
-          disabled={note.title.length < 5 || note.description.length < 5}
-          onClick={handleClick}
+          // disabled={note.title.length < 5 || note.description.length < 5}
+          // onClick={handleClick}
           type="submit"
           className="btn btn-primary"
         >

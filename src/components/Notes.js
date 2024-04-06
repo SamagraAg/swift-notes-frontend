@@ -31,7 +31,8 @@ export default function Notes() {
   };
 
   //Function to hit API call for updating note
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault(); 
     closeref.current.click();
     updateNote(enote._id, enote.title, enote.description, enote.tag);
   };
