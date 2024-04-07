@@ -11,7 +11,7 @@ export default function Notes() {
   const closeref = useRef(null);
 
   //state varialbe eNote for updating/editing the note
-  const [enote, setNote] = useState({
+  let [enote, setNote] = useState({
     _id: "",
     title: "",
     description: "",
@@ -32,7 +32,7 @@ export default function Notes() {
 
   //Function to hit API call for updating note
   const handleClick = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     closeref.current.click();
     updateNote(enote._id, enote.title, enote.description, enote.tag);
   };
@@ -124,14 +124,15 @@ export default function Notes() {
                 </div>
 
                 <div className="modal-footer">
-                  <button ref={closeref}
+                  <button
+                    ref={closeref}
                     type="button"
                     className="btn btn-secondary"
                     data-bs-dismiss="modal"
                   >
                     Close
                   </button>
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-dark">
                     Save changes
                   </button>
                 </div>
@@ -142,13 +143,18 @@ export default function Notes() {
       </div>
 
       {/*Component to show our notes, iterating through notes array fetched by useEffect */}
-      <h2>Your Notes</h2>
+      <h2 className="text-warning">Your Notes</h2>
       <div className="row">
-        {notes.map((note) => {
-          return (
-            <NoteItem key={note._id} note={note} editNote={editNote}></NoteItem>
-          );
-        })}
+        {notes.length > 0 &&
+          notes.map((note) => {
+            return (
+              <NoteItem
+                key={note._id}
+                note={note}
+                editNote={editNote}
+              ></NoteItem>
+            );
+          })}
       </div>
     </div>
   );

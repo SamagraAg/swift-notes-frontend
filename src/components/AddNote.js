@@ -17,7 +17,7 @@ export default function AddNote() {
   };
 
   return (
-    <div className="container">
+    <div className="container text-warning">
       <h2 className="mt-2">Add new note</h2>
       <form className="my-2" onSubmit={handleClick}>
         <div className="mb-2">
@@ -65,7 +65,7 @@ export default function AddNote() {
           // disabled={note.title.length < 5 || note.description.length < 5}
           // onClick={handleClick}
           type="submit"
-          className="btn btn-primary"
+          className="btn btn-dark"
         >
           Create Note
         </button>

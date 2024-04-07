@@ -23,7 +23,7 @@ const NoteState = (props) => {
 
     //Setting Notes variable with fetched response
     const fetchedNotes = await response.json();
-    setNotes(fetchedNotes);
+    setNotes(fetchedNotes.notes);
   };
 
   //Function to add a note
