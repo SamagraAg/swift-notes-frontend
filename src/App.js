@@ -28,13 +28,13 @@ export default function App() {
       <NoteState>
         <Router>
           <Navbar />
-          <Alert></Alert>
+          <Alert alert={alert}></Alert>
           <div className="container">
             <Routes>
-              <Route exact path="/" element={<Home />} />
+              <Route exact path="/" element={<Home showAlert={showAlert} />} />
               <Route exact path="/about" element={<About />} />
-              <Route exact path="/login" element={<Login />} />
-              <Route exact path="/signup" element={<Signup />} />
+              <Route exact path="/login" element={<Login showAlert={showAlert} />} />
+              <Route exact path="/signup" element={<Signup showAlert={showAlert} />} />
             </Routes>
           </div>
         </Router>

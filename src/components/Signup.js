@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 
-function Signup() {
+function Signup(props) {
   const host = "http://localhost:5000";
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
@@ -28,10 +28,11 @@ function Signup() {
     if (jsonResponse.success === true) {
       console.log(jsonResponse.authToken);
       localStorage.setItem("token", jsonResponse.authToken);
+      props.showAlert("Account created successfully", "success");
       navigate("/");
     } else {
-      alert(jsonResponse.errors);
       setCredentials({ name: "", email: "", password: "", cpassword: "" });
+      props.showAlert("Invalid details", "danger");
     }
   };
 

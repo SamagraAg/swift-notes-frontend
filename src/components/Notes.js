@@ -2,7 +2,7 @@ import { React, useContext, useEffect, useRef, useState } from "react";
 import NoteContext from "../context/NoteContext";
 import NoteItem from "./NoteItem";
 
-export default function Notes() {
+export default function Notes(props) {
   //using note context
   const context = useContext(NoteContext);
   const { notes, fetchNotes, updateNote } = context;
@@ -35,6 +35,7 @@ export default function Notes() {
     e.preventDefault();
     closeref.current.click();
     updateNote(enote._id, enote.title, enote.description, enote.tag);
+    props.showAlert("Note updated successfully", "success")
   };
 
   //Fetching User notes on load
@@ -149,6 +150,7 @@ export default function Notes() {
           notes.map((note) => {
             return (
               <NoteItem
+                showAlert = {props.showAlert}
                 key={note._id}
                 note={note}
                 editNote={editNote}

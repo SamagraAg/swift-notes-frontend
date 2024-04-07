@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
-function Login() {
+function Login(props) {
   const host = "http://localhost:5000";
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
@@ -24,10 +24,11 @@ function Login() {
     if (jsonResponse.success === true) {
       console.log(jsonResponse.authToken);
       localStorage.setItem("token", jsonResponse.authToken);
+      props.showAlert("Logged in successfully", "success");
       navigate("/");
     } else {
-      alert("Use correct id password");
       setCredentials({ email: "", password: "" });
+      props.showAlert("Invalid credentials", "danger");
     }
   };
 
@@ -71,7 +72,8 @@ function Login() {
                     id="password"
                     className="form-control"
                     onChange={onChange}
-                    required minLength={5}
+                    required
+                    minLength={5}
                   />
                 </div>
                 <div className="form-group my-2">
