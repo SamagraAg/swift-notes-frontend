@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Profile.css";
 const host = "http://localhost:5000";
 function Profile() {
@@ -18,8 +18,23 @@ function Profile() {
         "auth-token": localStorage.getItem("token"),
       },
     });
-    
+    const jsonResponse = await response.json();
+    if (jsonResponse.success) {
+      setCredentials({
+        firstName: jsonResponse.firstName,
+        lastName: jsonResponse.lastName,
+        mobile: credentials.mobile,
+        email: jsonResponse.email,
+        country: credentials.country,
+      });
+    console.log(credentials.email)
+    } else {
+      alert("Internal Server Error");
+    }
   };
+  useEffect(() => {
+    getDetails();
+  }, []);
   return (
     <div class="container rounded bg-white mt-5 mb-5">
       <div class="row">
@@ -122,7 +137,7 @@ function Profile() {
                   type="text"
                   class="form-control"
                   placeholder="Enter Email id"
-                  value=""
+                  value={credentials.email}
                 />
               </div>
               {/* <div class="col-md-12">
