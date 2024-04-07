@@ -51,6 +51,16 @@ export default function Navbar() {
                 About
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                className={`nav-link ${
+                  location.pathname === "/profile" ? "active" : ""
+                }`}
+                to="/profile"
+              >
+                Profile
+              </Link>
+            </li>
           </ul>
           {!localStorage.getItem("token") ? (
             <form className="d-flex">

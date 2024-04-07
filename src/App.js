@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Home from "./components/Home";
 import Alert from "./components/Alert";
+import Profile from "./components/Profile";
 import NoteState from "./context/NoteState";
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
             <Routes>
               <Route exact path="/" element={<Home showAlert={showAlert} />} />
               <Route exact path="/about" element={<About />} />
+              <Route exact path="/profile" element={<Profile />} />
               <Route exact path="/login" element={<Login showAlert={showAlert} />} />
               <Route exact path="/signup" element={<Signup showAlert={showAlert} />} />
             </Routes>
