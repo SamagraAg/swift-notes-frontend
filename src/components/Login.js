@@ -27,6 +27,7 @@ function Login() {
       navigate("/");
     } else {
       alert("Use correct id password");
+      setCredentials({ email: "", password: "" });
     }
   };
 
@@ -50,11 +51,13 @@ function Login() {
                     Email:
                   </label>
                   <input
+                    value={credentials.email}
                     type="email"
                     name="email"
                     id="email"
                     className="form-control"
                     onChange={onChange}
+                    required
                   />
                 </div>
                 <div className="form-group my-2">
@@ -62,11 +65,13 @@ function Login() {
                     Password:
                   </label>
                   <input
+                    value={credentials.password}
                     type="text"
                     name="password"
                     id="password"
                     className="form-control"
                     onChange={onChange}
+                    required minLength={5}
                   />
                 </div>
                 <div className="form-group my-2">

@@ -30,7 +30,8 @@ function Signup() {
       localStorage.setItem("token", jsonResponse.authToken);
       navigate("/");
     } else {
-      console.log(jsonResponse.errors)
+      alert(jsonResponse.errors);
+      setCredentials({ name: "", email: "", password: "", cpassword: "" });
     }
   };
 
@@ -55,11 +56,14 @@ function Signup() {
                   </label>
                   <br />
                   <input
+                    value={credentials.name}
                     type="text"
                     name="name"
                     id="name"
                     className="form-control"
                     onChange={onChange}
+                    required
+                    minLength={5}
                   />
                 </div>
                 <div className="form-group my-2">
@@ -68,11 +72,13 @@ function Signup() {
                   </label>
                   <br />
                   <input
+                    value={credentials.email}
                     type="email"
                     name="email"
                     id="email"
                     className="form-control"
                     onChange={onChange}
+                    required
                   />
                 </div>
                 <div className="form-group my-2">
@@ -81,11 +87,14 @@ function Signup() {
                   </label>
                   <br />
                   <input
+                    value={credentials.password}
                     type="text"
                     name="password"
                     id="password"
                     className="form-control"
                     onChange={onChange}
+                    required
+                    minLength={5}
                   />
                 </div>
                 <div className="form-group my-2">
@@ -94,11 +103,14 @@ function Signup() {
                   </label>
                   <br />
                   <input
+                    value={credentials.cpassword}
                     type="text"
                     name="cpassword"
                     id="cpassword"
                     className="form-control"
                     onChange={onChange}
+                    required
+                    minLength={5}
                   />
                 </div>
                 <div className="form-group my-2">
