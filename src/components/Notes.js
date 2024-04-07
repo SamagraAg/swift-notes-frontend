@@ -1,8 +1,10 @@
 import { React, useContext, useEffect, useRef, useState } from "react";
 import NoteContext from "../context/NoteContext";
 import NoteItem from "./NoteItem";
+import { useNavigate } from "react-router-dom";
 
 export default function Notes(props) {
+  const navigate = useNavigate();
   //using note context
   const context = useContext(NoteContext);
   const { notes, fetchNotes, updateNote } = context;
@@ -35,12 +37,13 @@ export default function Notes(props) {
     e.preventDefault();
     closeref.current.click();
     updateNote(enote._id, enote.title, enote.description, enote.tag);
-    props.showAlert("Note updated successfully", "success")
+    props.showAlert("Note updated successfully", "success");
   };
 
   //Fetching User notes on load
   useEffect(() => {
-    fetchNotes();
+    if (localStorage.getItem("token")) fetchNotes();
+    else navigate("/login");
     //eslint-disable-nextline
   }, []);
 
@@ -150,7 +153,7 @@ export default function Notes(props) {
           notes.map((note) => {
             return (
               <NoteItem
-                showAlert = {props.showAlert}
+                showAlert={props.showAlert}
                 key={note._id}
                 note={note}
                 editNote={editNote}

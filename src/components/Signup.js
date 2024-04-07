@@ -89,7 +89,7 @@ function Signup(props) {
                   <br />
                   <input
                     value={credentials.password}
-                    type="text"
+                    type="password"
                     name="password"
                     id="password"
                     className="form-control"
@@ -105,7 +105,7 @@ function Signup(props) {
                   <br />
                   <input
                     value={credentials.cpassword}
-                    type="text"
+                    type="password"
                     name="cpassword"
                     id="cpassword"
                     className="form-control"
