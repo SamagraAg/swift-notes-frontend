@@ -45,7 +45,7 @@ export default function Notes(props) {
     if (localStorage.getItem("token")) fetchNotes();
     else navigate("/login");
     //eslint-disable-nextline
-  });
+  },[]);
 
   return (
     //Button to open modal. It will be hidden and clicked via 'ref'
