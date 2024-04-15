@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 function Login(props) {
-  const host = "http://localhost:5000";
+  const host = process.env.BACKEND_URL;
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
