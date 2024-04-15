@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 function Login(props) {
-  const host = process.env.REACT_APP_BACKEND_URL;
+    const host = "https://swift-notes-backend-stmp.onrender.com";
   console.log(host);
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
