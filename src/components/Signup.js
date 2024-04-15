@@ -13,7 +13,6 @@ function Signup(props) {
   });
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log(process.env.REACT_APP_BACKEND_URL)
     const response = await fetch(`${host}/api/auth/createUser`, {
       method: "POST",
       headers: {
