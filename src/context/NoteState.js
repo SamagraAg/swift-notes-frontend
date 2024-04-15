@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const NoteState = (props) => {
   //host url
-  const host = process.env.BACKEND_URL;
+  const host = process.env.REACT_APP_BACKEND_URL;
 
   //state variable "notes"
   const [notes, setNotes] = useState([]);

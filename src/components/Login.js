@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 function Login(props) {
-  const host = process.env.BACKEND_URL;
+  const host = process.env.REACT_APP_BACKEND_URL;
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
   const handleClick = async (e) => {
+    console.log(process.env.REACT_APP_BACKEND_URL)
     e.preventDefault();
     const response = await fetch(`${host}/api/auth/login`, {
       method: "POST",

@@ -3,7 +3,7 @@ import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 
 function Signup(props) {
-  const host = process.env.BACKEND_URL;
+  const host = process.env.REACT_APP_BACKEND_URL;
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     name: "",
@@ -13,6 +13,7 @@ function Signup(props) {
   });
   const handleClick = async (e) => {
     e.preventDefault();
+    console.log(process.env.REACT_APP_BACKEND_URL)
     const response = await fetch(`${host}/api/auth/createUser`, {
       method: "POST",
       headers: {

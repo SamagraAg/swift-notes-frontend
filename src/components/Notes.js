@@ -43,7 +43,6 @@ export default function Notes(props) {
   //Fetching User notes on load
   useEffect(() => {
     if (localStorage.getItem("token")) fetchNotes();
-    else navigate("/login");
     //eslint-disable-nextline
   }, []);
 
