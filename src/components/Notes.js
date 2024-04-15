@@ -44,7 +44,7 @@ export default function Notes(props) {
   useEffect(() => {
     if (localStorage.getItem("token")) fetchNotes();
     //eslint-disable-nextline
-  }, []);
+  });
 
   return (
     //Button to open modal. It will be hidden and clicked via 'ref'
