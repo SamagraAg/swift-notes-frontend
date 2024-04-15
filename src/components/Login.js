@@ -3,13 +3,13 @@ import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 function Login(props) {
   const host = process.env.REACT_APP_BACKEND_URL;
+  console.log(host);
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
   const handleClick = async (e) => {
-    console.log(process.env.REACT_APP_BACKEND_URL)
     e.preventDefault();
     const response = await fetch(`${host}/api/auth/login`, {
       method: "POST",
@@ -36,6 +36,7 @@ function Login(props) {
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
+  console.log(process.env.REACT_APP_BACKEND_URL);
   return (
     <div id="login">
       <h3 className="text-center text-light pt-5 d-none">Login form</h3>
