@@ -4,11 +4,11 @@ import { useState } from "react";
 const NoteState = (props) => {
   //host url
   const host = process.env.REACT_APP_BACKEND_URL;
-
+  console.log(host);
   //state variable "notes"
   const [notes, setNotes] = useState([]);
 
-  //Function to fetch all notes via api
+  //Function to fetch all notes via apia
   const fetchNotes = async () => {
     //API CALL
     const response = await fetch(`${host}/api/notes/fetchallnotes`, {
