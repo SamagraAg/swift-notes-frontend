@@ -3,7 +3,7 @@ import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 
 function Signup(props) {
-  const host = process.env.REACT_APP_BACKEND_URL;
+  const host = "https://swift-notes-backend-stmp.onrender.com";
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     name: "",
