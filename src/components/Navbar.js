@@ -62,7 +62,7 @@ export default function Navbar() {
               </Link>
             </form>
           ) : (
-            <button onClick={handleLogout} className="btn btn-primary mx-1" to="/login" role="button">
+            <button onClick={handleLogout} className="btn btn-primary mx-1" to="/login">
               Logout
             </button>
           )}

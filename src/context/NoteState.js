@@ -1,4 +1,3 @@
-import { json } from "react-router-dom";
 import NoteContext from "./NoteContext";
 import { useState } from "react";
 
@@ -52,7 +51,7 @@ const NoteState = (props) => {
         "auth-token": localStorage.getItem("token"),
       },
     });
-
+    console.log(response)
     //Remove Deleted node from array
     const newNotes = notes.filter((note) => {
       return note._id !== id;
