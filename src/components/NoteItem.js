@@ -7,6 +7,27 @@ export default function NoteItem(props) {
   const context = useContext(NoteContext);
   const { deleteNote } = context;
 
+  const getVoice = async (note) => {
+    try {
+      const apiKey = process.env.REACT_APP_TTS_APIKEY;
+
+      const url = `http://api.voicerss.org/?key=${apiKey}&hl=en-us&c=MP3&src=${encodeURIComponent(note.description)}`;
+      
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        throw new Error("Failed to fetch the voice from the API");
+      }
+  
+      const audio = new Audio(url);
+      audio.play();
+      
+    } catch (error) {
+      console.error("Error while fetching the voice:", error);
+    }
+  };
+  
+
   return (
     <div className="col-md-3">
       <div className="card my-2">
@@ -30,7 +51,7 @@ export default function NoteItem(props) {
               <i
                   className="fa-solid fa-volume-up mx-2"
                   onClick={() => {
-                    editNote(note);
+                    getVoice(note);
                   }}
                 ></i>
             </div>
