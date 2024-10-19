@@ -27,6 +27,12 @@ export default function NoteItem(props) {
                   editNote(note);
                 }}
               ></i>
+              <i
+                  className="fa-solid fa-volume-up mx-2"
+                  onClick={() => {
+                    editNote(note);
+                  }}
+                ></i>
             </div>
           </div>
           <p className="card-text">{note.description}</p>
