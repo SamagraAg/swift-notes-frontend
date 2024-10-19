@@ -11,7 +11,7 @@ export default function NoteItem(props) {
     try {
       const apiKey = process.env.REACT_APP_TTS_APIKEY;
 
-      const url = `http://api.voicerss.org/?key=${apiKey}&hl=en-us&c=MP3&src=${encodeURIComponent(note.description)}`;
+      const url = `https://api.voicerss.org/?key=${apiKey}&hl=en-us&c=MP3&src=${encodeURIComponent(note.description)}`;
       
       const response = await fetch(url);
       
